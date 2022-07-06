@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const ContainerApp = styled.div`
@@ -72,7 +73,7 @@ const ButtonMensaje = styled.button`
     background-color: #f85179;
 `
 
-const ChatSide = styled.div`
+const ChatSide = styled(Link)`
     display: flex;
     align-items: center;
     background-color:#454964;
