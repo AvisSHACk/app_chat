@@ -20,22 +20,23 @@ const Mensajeria = () => {
     const {chats} = useChat();
     const {usuario} = useAuth();
     const {id} = useParams();
-
     const [userAmigo, cambiarUserAmigo] = useState({});
+    const [cargando, cambiarCargando] = useState(true);
 
     useEffect(() =>{
         const onSuscribe = onSnapshot(doc(db, `chats/${id}`), (snapshot) => {
-            cambiarUserAmigo(snapshot.data().users.filter(user => user !== usuario.email))
+            cambiarUserAmigo(snapshot.data().users.filter(user => user !== usuario.email)[0])
+            cambiarCargando(false);
         })
+        
+        return onSuscribe;
     }, [id, usuario])
-
-    console.log(userAmigo);
 
 
     return ( 
         <MensajesContainer>
             <HeaderMensjeria>
-                <h2>{userAmigo}</h2>
+                <h2>{!cargando && userAmigo}</h2>
             </HeaderMensjeria>
             <Mensajes>
                 <MyMensaje>Lorem ipsum dolor sit amet consectetur adipisicing elit.</MyMensaje>
