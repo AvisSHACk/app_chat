@@ -30,6 +30,8 @@ const ChatProvider = ({children}) => {
         getChats();
     }, [])
 
+    console.log("Chats desde el context", chats)
+
     return (
     
         <ChatContext.Provider value={{chats: chats}}>

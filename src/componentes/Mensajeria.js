@@ -1,53 +1,58 @@
-import { doc, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../contextos/authContext";
 import { useChat } from "../contextos/chatsContext";
 import { 
-    ButtonMensaje, 
-    ChatBox, 
-    FormMensaje, 
     HeaderMensjeria, 
-    InputMensaje, 
     Mensajes, 
     MensajesContainer, 
-    MyMensaje, 
-    YourMensaje 
+    MyMensaje
 } from "../elementos/ContainerApp";
 import { db } from "../firebase/firebaseConfig";
+import ChatBox from "./ChatBox";
 
 const Mensajeria = () => {
     const {chats} = useChat();
     const {usuario} = useAuth();
     const {id} = useParams();
     const [userAmigo, cambiarUserAmigo] = useState({});
+    const [mensajes, cambiarMensajes] = useState([]);
     const [cargando, cambiarCargando] = useState(true);
 
     useEffect(() =>{
-        const onSuscribe = onSnapshot(doc(db, `chats/${id}`), (snapshot) => {
-            cambiarUserAmigo(snapshot.data().users.filter(user => user !== usuario.email)[0])
-            cambiarCargando(false);
-        })
         
+        cambiarUserAmigo(
+            chats.filter(chat => chat.id === id)[0]
+            .users.filter(user => user !== usuario.email)[0]
+        )
+
+        const onSuscribe = onSnapshot(query(collection(db, `chats/${id}/mensajes`), orderBy("timestamp")), (snapshot) => {
+            cambiarMensajes(snapshot.docs.map(mensaje => {
+                return {...mensaje.data()};
+            }));
+        })
+
+        cambiarCargando(false);
         return onSuscribe;
-    }, [id, usuario])
 
+        
+    }, [id, usuario, chats])
 
+    console.log(mensajes)
     return ( 
         <MensajesContainer>
             <HeaderMensjeria>
                 <h2>{!cargando && userAmigo}</h2>
             </HeaderMensjeria>
             <Mensajes>
-                <MyMensaje>Lorem ipsum dolor sit amet consectetur adipisicing elit.</MyMensaje>
-                <YourMensaje>Lorem ipsum dolor sit amet consectetur adipisicing elit.</YourMensaje>
+                {!cargando && mensajes.map(mensaje => {
+                    return <MyMensaje key={Math.random()} propiedad={mensaje.email === usuario.email}>{mensaje.mensaje}</MyMensaje>
+                })}
+                    
+                {/* <YourMensaje>Lorem ipsum dolor sit amet consectetur adipisicing elit.</YourMensaje> */}
             </Mensajes>
-            <ChatBox>
-                    <FormMensaje action="">
-                        <InputMensaje type="text" name="mensaje" id="mensaje" placeholder="Escribe tu mensaje"/>
-                        <ButtonMensaje>Enviar</ButtonMensaje>
-                    </FormMensaje>
-                </ChatBox>
+            <ChatBox id={id} userAmigo={userAmigo}/>
         </MensajesContainer>
      );
 }

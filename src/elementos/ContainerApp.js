@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const ContainerApp = styled.div`
     display: flex;
@@ -44,6 +44,12 @@ const MyMensaje = styled.p`
     display: inline-block;
     border-radius: 20px;
     margin-left: auto;
+
+    ${({propiedad}) => propiedad && css`
+        background-color: #454964;
+        margin-left:0;
+        margin-right:auto;
+    `}
 `
 
 const YourMensaje = styled(MyMensaje)`
@@ -52,7 +58,7 @@ const YourMensaje = styled(MyMensaje)`
     margin-right:auto;
 `
 
-const ChatBox = styled.div`
+const ChatBoxContainer = styled.div`
     padding-right: 2rem;
     padding-left: 2rem;
     height: 10%;
@@ -95,7 +101,7 @@ export {
     SidebarContainer, 
     HeaderMensjeria, 
     Mensajes, 
-    ChatBox,
+    ChatBoxContainer,
     InputMensaje,
     FormMensaje,
     ButtonMensaje,
