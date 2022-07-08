@@ -5,7 +5,8 @@ import {
     ConstainerChats,
     ImageSide,
     NombreChat, 
-    SidebarContainer} from "../elementos/ContainerApp";
+    SidebarContainer,
+    HeaderSidebar} from "../elementos/ContainerApp";
 import {useState } from "react";
 import { useAuth } from "../contextos/authContext";
 import { useChat } from "../contextos/chatsContext";
@@ -24,6 +25,11 @@ const Sidebar = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(emailAmigo === usuario.email) {
+            cambiarEmailAmigo("");
+            return;
+        }
         
         addDoc(collection(db, "chats"), {
             users: [emailAmigo, usuario.email]
@@ -36,8 +42,11 @@ const Sidebar = () => {
     }
     return ( 
         <SidebarContainer>
-            <h3>Conversaciones <ButtonMensaje onClick={cerrarSesion}>Cerrar sesion</ButtonMensaje></h3>
-            <FormAuth action="" onSubmit={handleSubmit} app={true}>
+            <HeaderSidebar>
+                <h3>{usuario.email}</h3>
+                <ButtonMensaje onClick={cerrarSesion}>Cerrar sesion</ButtonMensaje>
+            </HeaderSidebar>
+            <FormAuth action="" onSubmit={handleSubmit}>
                 <Input 
                     type="text" 
                     name="email" 
@@ -49,6 +58,7 @@ const Sidebar = () => {
                 />
                 <Button app={true}>Agregar amigo</Button>
             </FormAuth>
+            <h4>Conversaciones</h4>
             <ConstainerChats>
                 {chats.filter(chat => chat.users.includes(usuario.email)).map((chat) => 
                     <ChatSide key={chat.id} to={`/${chat.id}`}>

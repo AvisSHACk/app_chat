@@ -43,7 +43,7 @@ const Registro = () => {
     }
 
     return ( 
-        <FormAuth action="" onSubmit={handleSubmit}>
+        <FormAuth action="" onSubmit={handleSubmit} auth>
             <Input 
                 type="text" 
                 name="userName" 
@@ -51,6 +51,7 @@ const Registro = () => {
                 placeholder="Ingresa tu usuario"
                 value={userName}
                 onChange={(e) => cambiarUsername(e.target.value)}
+                auth
             />
             <Input 
                 type="email" 
@@ -59,6 +60,7 @@ const Registro = () => {
                 placeholder="Ingresa tu correo electronico"
                 value={email}
                 onChange={(e) => cambiarEmail(e.target.value)}
+                auth
             />
 
             <Input 
@@ -68,9 +70,10 @@ const Registro = () => {
                 placeholder="Ingresa tu contraseña"
                 value={password}
                 onChange={(e) => cambiarPassword(e.target.value)}
+                auth
             />
 
-            <Button>Registrarse</Button>
+            <Button auth>Registrarse</Button>
             <Parrafo>¿Ya tienes una cuenta? <Enlace to={"/login"}>Inicia sesion</Enlace></Parrafo>
             <TextoMensaje>{mensaje}</TextoMensaje>
         </FormAuth>

@@ -10,15 +10,19 @@ const ContainerApp = styled.div`
 const SidebarContainer = styled.aside`
     border-right:1px solid #666b91;
     padding: 1.5rem 1rem;
-    overflow-y: scroll;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
+    display: flex;
+    flex-direction: column;
+    width: 40%;
 `
 
 const ConstainerChats = styled.div`
-    
+    flex-grow: 1;
+    overflow-y: scroll;
+`
+
+const HeaderSidebar = styled.header`
+    display:flex;
+    justify-content: space-between;
 `
 
 const MensajesContainer = styled.main`
@@ -46,8 +50,8 @@ const Mensajes = styled.div`
     flex-direction: column;
     overflow-y: scroll;
 
-    &::-webkit-scrollbar {
-        display: none;
+    &::-webkit-scrollbar-button {
+        background-color: #000;
     }
 `
 
@@ -124,5 +128,6 @@ export {
     ChatSide,
     ImageSide,
     NombreChat,
-    ConstainerChats
+    ConstainerChats,
+    HeaderSidebar
 };
