@@ -1,5 +1,5 @@
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../contextos/authContext";
 import { useChat } from "../contextos/chatsContext";
@@ -19,6 +19,8 @@ const Mensajeria = () => {
     const [userAmigo, cambiarUserAmigo] = useState({});
     const [mensajes, cambiarMensajes] = useState([]);
     const [cargando, cambiarCargando] = useState(true);
+    const anchor = useRef();
+    
 
     useEffect(() =>{
         
@@ -32,10 +34,9 @@ const Mensajeria = () => {
                 return {...mensaje.data()};
             }));
         })
-
+        
         cambiarCargando(false);
         return onSuscribe;
-
         
     }, [id, usuario, chats])
 
@@ -51,9 +52,11 @@ const Mensajeria = () => {
                 })}
                     
                 {/* <YourMensaje>Lorem ipsum dolor sit amet consectetur adipisicing elit.</YourMensaje> */}
+            <div ref={anchor}></div>
             </Mensajes>
-            <ChatBox id={id} userAmigo={userAmigo}/>
+            <ChatBox id={id} userAmigo={userAmigo} anchor={anchor}/>
         </MensajesContainer>
+        
      );
 }
  

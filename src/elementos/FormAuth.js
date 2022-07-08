@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const FormAuth = styled.form`
     display: flex;
@@ -8,6 +8,13 @@ const FormAuth = styled.form`
     margin-right: auto;
     width: 80%;
     margin-top: 8rem;
+
+    ${({app}) => app && css`
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    `}
+    
 `
 
 const Input = styled.input`
@@ -18,6 +25,10 @@ const Input = styled.input`
     border-bottom: 1px solid #7540ed;
     color:#fff;
     margin-bottom: 2rem;
+
+    ${({app}) => app && css`
+        padding:1rem;
+    `}
 `
 
 const Button = styled.button`
@@ -26,6 +37,10 @@ const Button = styled.button`
     background-color:#f85179;
     color:#fff;
     cursor: pointer;
+
+    ${({app}) => app && css`
+        padding:1rem 2rem;
+    `}
 `
 
 const Parrafo = styled.p`

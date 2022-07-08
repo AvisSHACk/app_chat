@@ -1,5 +1,5 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { 
     ButtonMensaje, 
     ChatBoxContainer, 
@@ -7,7 +7,7 @@ import {
     InputMensaje
 } from "../elementos/ContainerApp";
 import { db } from "../firebase/firebaseConfig";
-const ChatBox = ({id, userAmigo}) => {
+const ChatBox = ({id, userAmigo, anchor}) => {
     const [mensaje, cambiarMensaje] = useState("");
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,7 +18,13 @@ const ChatBox = ({id, userAmigo}) => {
             timestamp: serverTimestamp()
         })
 
+        anchor.current.scrollIntoView({behavior: "smooth"})
+
     }
+
+    useEffect(() => {
+        anchor.current.scrollIntoView({behavior: "smooth"})
+    })
     return ( 
         <ChatBoxContainer>
             <FormMensaje action="" onSubmit={handleSubmit}>

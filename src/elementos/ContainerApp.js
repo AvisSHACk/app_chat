@@ -8,9 +8,17 @@ const ContainerApp = styled.div`
 `
 
 const SidebarContainer = styled.aside`
-    width: 30%;
     border-right:1px solid #666b91;
     padding: 1.5rem 1rem;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+`
+
+const ConstainerChats = styled.div`
+    
 `
 
 const MensajesContainer = styled.main`
@@ -36,6 +44,11 @@ const Mensajes = styled.div`
     padding-left: 2rem;
     display:flex;
     flex-direction: column;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `
 
 const MyMensaje = styled.p`
@@ -73,6 +86,7 @@ const InputMensaje = styled.input `
     border:1px solid #666b91;
     width: 92%;
     padding: 1.5rem 1rem;
+    color:#fff;
 `
 
 const ButtonMensaje = styled.button`
@@ -109,5 +123,6 @@ export {
     YourMensaje,
     ChatSide,
     ImageSide,
-    NombreChat
+    NombreChat,
+    ConstainerChats
 };
