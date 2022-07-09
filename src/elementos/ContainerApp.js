@@ -12,7 +12,7 @@ const SidebarContainer = styled.aside`
     padding: 1.5rem 1rem;
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 30%;
 `
 
 const ConstainerChats = styled.div`
@@ -29,8 +29,8 @@ const MensajesContainer = styled.main`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 70%;
-    `
+    width: 80%;
+`
 
 const HeaderMensjeria = styled.header`
     display: flex;
@@ -50,8 +50,14 @@ const Mensajes = styled.div`
     flex-direction: column;
     overflow-y: scroll;
 
-    &::-webkit-scrollbar-button {
-        background-color: #000;
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #f85179;
+        border-radius: 12px;
     }
 `
 

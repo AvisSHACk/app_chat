@@ -1,8 +1,6 @@
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useAuth } from "../contextos/authContext";
-import { useChat } from "../contextos/chatsContext";
 import { 
     HeaderMensjeria, 
     Mensajes, 
@@ -12,10 +10,8 @@ import {
 import { db } from "../firebase/firebaseConfig";
 import ChatBox from "./ChatBox";
 
-const Mensajeria = () => {
-    const {chats} = useChat();
+const Mensajeria = ({chats, id}) => {
     const {usuario} = useAuth();
-    const {id} = useParams();
     const [userAmigo, cambiarUserAmigo] = useState({});
     const [mensajes, cambiarMensajes] = useState([]);
     const [cargando, cambiarCargando] = useState(true);
@@ -23,24 +19,28 @@ const Mensajeria = () => {
     
 
     useEffect(() =>{
-        
-        cambiarUserAmigo(
-            chats.filter(chat => chat.id === id)[0]
-            .users.filter(user => user !== usuario.email)[0]
-        )
+        if(id) {
+            cambiarUserAmigo(
+                chats.filter(chat => chat.id === id)[0]
+                .users.filter(user => user !== usuario.email)[0]
+            )
+            console.log(id);
 
-        const onSuscribe = onSnapshot(query(collection(db, `chats/${id}/mensajes`), orderBy("timestamp")), (snapshot) => {
-            cambiarMensajes(snapshot.docs.map(mensaje => {
-                return {...mensaje.data()};
-            }));
-        })
-        
-        cambiarCargando(false);
-        return onSuscribe;
+            const onSuscribe = onSnapshot(query(collection(db, `chats/${id}/mensajes`), orderBy("timestamp")), (snapshot) => {
+                cambiarMensajes(snapshot.docs.map(mensaje => {
+                    return {...mensaje.data()};
+                }));
+            })
+            
+            cambiarCargando(false);
+            console.log(chats)
+            return onSuscribe;
+        }
+
+
         
     }, [id, usuario, chats])
 
-    console.log(mensajes)
     return ( 
         <MensajesContainer>
             <HeaderMensjeria>

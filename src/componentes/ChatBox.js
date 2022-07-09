@@ -17,7 +17,7 @@ const ChatBox = ({id, userAmigo, anchor}) => {
             email: userAmigo,
             timestamp: serverTimestamp()
         })
-
+        cambiarMensaje("");
         anchor.current.scrollIntoView({behavior: "smooth"})
 
     }

@@ -9,14 +9,12 @@ import {
     HeaderSidebar} from "../elementos/ContainerApp";
 import {useState } from "react";
 import { useAuth } from "../contextos/authContext";
-import { useChat } from "../contextos/chatsContext";
 import { Button, FormAuth, Input } from "../elementos/FormAuth";
 
 
-const Sidebar = () => {
+const Sidebar = ({chats, cambiarIdChat}) => {
     const [emailAmigo, cambiarEmailAmigo] = useState("");
     const {usuario} = useAuth();
-    const {chats} = useChat();
     
     const cerrarSesion = () => {
         signOut(auth);
@@ -36,10 +34,13 @@ const Sidebar = () => {
         })
         
         cambiarEmailAmigo("");
-
-
-
     }
+
+    const getId = (e, id) => {
+        e.preventDefault();
+        cambiarIdChat(id);
+    }
+    
     return ( 
         <SidebarContainer>
             <HeaderSidebar>
@@ -61,7 +62,7 @@ const Sidebar = () => {
             <h4>Conversaciones</h4>
             <ConstainerChats>
                 {chats.filter(chat => chat.users.includes(usuario.email)).map((chat) => 
-                    <ChatSide key={chat.id} to={`/${chat.id}`}>
+                    <ChatSide key={chat.id} to={'dadsa'} onClick={(e) => getId(e, chat.id)}>
                         <ImageSide src="https://picsum.photos/50" alt="" />
                         <NombreChat>{chat.users.filter(user => user !== usuario.email)}</NombreChat>
                     </ChatSide>

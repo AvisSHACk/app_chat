@@ -4,6 +4,16 @@
   box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+* ::-webkit-scrollbar-thumb {
+  background-color: #f85179;
+  border-radius: 12px;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -32,4 +42,9 @@ h1, h2, h3, h4, h5, h6 {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
