@@ -10,7 +10,7 @@ import {
 import { db } from "../firebase/firebaseConfig";
 import ChatBox from "./ChatBox";
 
-const Mensajeria = ({chats, id}) => {
+const Mensajeria = ({chats, id, buttonMobile, cambiarbuttonMobile}) => {
     const {usuario} = useAuth();
     const [userAmigo, cambiarUserAmigo] = useState({});
     const [mensajes, cambiarMensajes] = useState([]);
@@ -41,9 +41,14 @@ const Mensajeria = ({chats, id}) => {
         
     }, [id, usuario, chats])
 
+    const abrirMenu = () => {
+        cambiarbuttonMobile(!buttonMobile);
+    }
+
     return ( 
         <MensajesContainer>
             <HeaderMensjeria>
+                <button onClick={() => abrirMenu()}>Menu</button>
                 <h2>{!cargando && userAmigo}</h2>
             </HeaderMensjeria>
             <Mensajes>

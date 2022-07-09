@@ -9,6 +9,7 @@ import { db } from "../firebase/firebaseConfig";
 const Layout = () => {
     const [chats, cambiarChats] = useState([]);
     const [idChat, cambiarIdChat] = useState();
+    const [buttonMobile, cambiarbuttonMobile] = useState(false);
     // const [cargando, cambiarCargando] = useState(true);
 
     useEffect(() => {
@@ -23,10 +24,21 @@ const Layout = () => {
         return onSuscribe;
     }, [])
 
+    console.log(buttonMobile)
+
     return (
         <ContainerApp>
-            <Sidebar chats={chats} cambiarIdChat={cambiarIdChat}/>
-            <Mensajeria chats={chats} id={idChat}/>
+            <Sidebar 
+                chats={chats} 
+                cambiarIdChat={cambiarIdChat} 
+                buttonMobile={buttonMobile}
+            />
+            <Mensajeria 
+                chats={chats} 
+                id={idChat} 
+                buttonMobile={buttonMobile}
+                cambiarbuttonMobile={cambiarbuttonMobile}
+            />
         </ContainerApp>
      );
 }

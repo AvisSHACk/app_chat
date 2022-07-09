@@ -12,7 +12,7 @@ import { useAuth } from "../contextos/authContext";
 import { Button, FormAuth, Input } from "../elementos/FormAuth";
 
 
-const Sidebar = ({chats, cambiarIdChat}) => {
+const Sidebar = ({chats, cambiarIdChat, buttonMobile}) => {
     const [emailAmigo, cambiarEmailAmigo] = useState("");
     const {usuario} = useAuth();
     
@@ -42,7 +42,7 @@ const Sidebar = ({chats, cambiarIdChat}) => {
     }
     
     return ( 
-        <SidebarContainer>
+        <SidebarContainer buttonMobile={buttonMobile}>
             <HeaderSidebar>
                 <h3>{usuario.email}</h3>
                 <ButtonMensaje onClick={cerrarSesion}>Cerrar sesion</ButtonMensaje>

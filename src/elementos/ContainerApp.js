@@ -2,17 +2,34 @@ import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 const ContainerApp = styled.div`
-    display: flex;
-    justify-content: space-between;
+    @media screen and (min-width: 900px) {
+        display: flex;
+        justify-content: space-between;
+    }
     height: 100vh;
 `
 
 const SidebarContainer = styled.aside`
+    position: absolute;
+    left: -100%;
+    width:100%;
+    height: 100%;
     border-right:1px solid #666b91;
     padding: 1.5rem 1rem;
     display: flex;
     flex-direction: column;
-    width: 30%;
+    transition: left .3s;
+    background-color: #2e3148;
+    width: 80%;
+    ${({buttonMobile}) => buttonMobile && css`
+        left: 0;
+    `}
+
+    @media screen and (min-width: 900px) {
+        position: static;
+        width: 40%;
+    }
+
 `
 
 const ConstainerChats = styled.div`
@@ -29,7 +46,11 @@ const MensajesContainer = styled.main`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 80%;
+    height: 100%;
+    
+    @media screen and (min-width: 900px) {
+        width: 80%;
+    }
 `
 
 const HeaderMensjeria = styled.header`
@@ -90,12 +111,15 @@ const ChatBoxContainer = styled.div`
 const FormMensaje = styled.form`
     display:flex;
     justify-content: space-between;
+    height:100%;
+    padding-top: .8rem;
+    padding-bottom: .8rem;
 `
 
 const InputMensaje = styled.input `
     border:1px solid #666b91;
     width: 92%;
-    padding: 1.5rem 1rem;
+    height: 100%;
     color:#fff;
 `
 
