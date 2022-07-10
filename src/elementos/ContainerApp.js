@@ -6,7 +6,7 @@ const ContainerApp = styled.div`
         display: flex;
         justify-content: space-between;
     }
-    height: 100vh;
+    height: 100%;
 `
 
 const SidebarContainer = styled.aside`

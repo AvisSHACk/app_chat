@@ -10,15 +10,29 @@ import {
 import {useState } from "react";
 import { useAuth } from "../contextos/authContext";
 import { Button, FormAuth, Input } from "../elementos/FormAuth";
+import { useEffect } from "react";
+import { doc, getDoc } from "firebase/firestore";
 
 
-const Sidebar = ({chats, cambiarIdChat, buttonMobile}) => {
+const Sidebar = ({chats, cambiarIdChat, buttonMobile, cambiarbuttonMobile}) => {
     const [emailAmigo, cambiarEmailAmigo] = useState("");
+    const [usuarioLogeado, cambiarUsuarioLogeado] = useState({});
     const {usuario} = useAuth();
     
     const cerrarSesion = () => {
         signOut(auth);
     }
+
+    useEffect(() => {
+        const infoUsuario = async () => {
+            const docRef = doc(db, `usuarios/${usuario.uid}`);
+            const docSnap = await getDoc(docRef)
+            cambiarUsuarioLogeado(docSnap.data());
+        }
+
+        infoUsuario();
+    })
+
 
 
     const handleSubmit = async (e) => {
@@ -40,12 +54,17 @@ const Sidebar = ({chats, cambiarIdChat, buttonMobile}) => {
         e.preventDefault();
         cambiarIdChat(id);
     }
+
+    const cerrarSidebar = () => {
+        cambiarbuttonMobile(false)
+    }
     
     return ( 
         <SidebarContainer buttonMobile={buttonMobile}>
             <HeaderSidebar>
-                <h3>{usuario.email}</h3>
+                <h3>{usuarioLogeado.userName}</h3>
                 <ButtonMensaje onClick={cerrarSesion}>Cerrar sesion</ButtonMensaje>
+                <ButtonMensaje onClick={cerrarSidebar}>Cerrar Menu</ButtonMensaje>
             </HeaderSidebar>
             <FormAuth action="" onSubmit={handleSubmit}>
                 <Input 

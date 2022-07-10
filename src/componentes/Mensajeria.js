@@ -7,10 +7,11 @@ import {
     MensajesContainer, 
     MyMensaje
 } from "../elementos/ContainerApp";
+import { Button } from "../elementos/FormAuth";
 import { db } from "../firebase/firebaseConfig";
 import ChatBox from "./ChatBox";
 
-const Mensajeria = ({chats, id, buttonMobile, cambiarbuttonMobile}) => {
+const Mensajeria = ({chats, id, cambiarbuttonMobile}) => {
     const {usuario} = useAuth();
     const [userAmigo, cambiarUserAmigo] = useState({});
     const [mensajes, cambiarMensajes] = useState([]);
@@ -42,22 +43,20 @@ const Mensajeria = ({chats, id, buttonMobile, cambiarbuttonMobile}) => {
     }, [id, usuario, chats])
 
     const abrirMenu = () => {
-        cambiarbuttonMobile(!buttonMobile);
+        cambiarbuttonMobile(true);
     }
 
     return ( 
         <MensajesContainer>
             <HeaderMensjeria>
-                <button onClick={() => abrirMenu()}>Menu</button>
+                <Button onClick={() => abrirMenu()}>Menu</Button>
                 <h2>{!cargando && userAmigo}</h2>
             </HeaderMensjeria>
             <Mensajes>
                 {!cargando && mensajes.map(mensaje => {
                     return <MyMensaje key={Math.random()} propiedad={mensaje.email === usuario.email}>{mensaje.mensaje}</MyMensaje>
                 })}
-                    
-                {/* <YourMensaje>Lorem ipsum dolor sit amet consectetur adipisicing elit.</YourMensaje> */}
-            <div ref={anchor}></div>
+                <div ref={anchor}></div>
             </Mensajes>
             <ChatBox id={id} userAmigo={userAmigo} anchor={anchor}/>
         </MensajesContainer>

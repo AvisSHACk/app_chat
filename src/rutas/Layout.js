@@ -24,14 +24,13 @@ const Layout = () => {
         return onSuscribe;
     }, [])
 
-    console.log(buttonMobile)
-
     return (
         <ContainerApp>
             <Sidebar 
                 chats={chats} 
                 cambiarIdChat={cambiarIdChat} 
                 buttonMobile={buttonMobile}
+                cambiarbuttonMobile={cambiarbuttonMobile}
             />
             <Mensajeria 
                 chats={chats} 
