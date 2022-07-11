@@ -12,6 +12,7 @@ import { useAuth } from "../contextos/authContext";
 import { Button, FormAuth, Input } from "../elementos/FormAuth";
 import { useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
+import filterEmailFriend from "./../functions/filterEmailFriend";
 
 
 const Sidebar = ({chats, cambiarIdChat, buttonMobile, cambiarbuttonMobile}) => {
@@ -80,7 +81,7 @@ const Sidebar = ({chats, cambiarIdChat, buttonMobile, cambiarbuttonMobile}) => {
             </FormAuth>
             <h4>Conversaciones</h4>
             <ConstainerChats>
-                {chats.filter(chat => chat.users.includes(usuario.email)).map((chat) => 
+                {filterEmailFriend(chats, usuario.email).map((chat) => 
                     <ChatSide key={chat.id} to={'dadsa'} onClick={(e) => getId(e, chat.id)}>
                         <ImageSide src="https://picsum.photos/50" alt="" />
                         <NombreChat>{chat.users.filter(user => user !== usuario.email)}</NombreChat>
