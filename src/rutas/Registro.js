@@ -48,7 +48,7 @@ const Registro = () => {
                 type="text" 
                 name="userName" 
                 id="userName"
-                placeholder="Ingresa tu usuario"
+                placeholder="Ingresa tu nombre"
                 value={userName}
                 onChange={(e) => cambiarUsername(e.target.value)}
                 auth

@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 const ContainerApp = styled.div`
@@ -15,7 +14,6 @@ const SidebarContainer = styled.aside`
     width:100%;
     height: 100%;
     border-right:1px solid #666b91;
-    padding: 1.5rem 1rem;
     display: flex;
     flex-direction: column;
     transition: left .3s;
@@ -27,7 +25,7 @@ const SidebarContainer = styled.aside`
 
     @media screen and (min-width: 900px) {
         position: static;
-        width: 40%;
+        width: 25%;
     }
 
 `
@@ -35,9 +33,10 @@ const SidebarContainer = styled.aside`
 const ConstainerChats = styled.div`
     flex-grow: 1;
     overflow-y: scroll;
+    position:relative;
 `
 
-const HeaderSidebar = styled.header`
+const HeaderSidebarElement = styled.header`
     display:flex;
     justify-content: space-between;
 `
@@ -60,6 +59,9 @@ const HeaderMensjeria = styled.header`
     padding-right: 2rem;
     height: 10%;
     border-bottom:1px solid #666b91;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     
 `
 
@@ -127,12 +129,31 @@ const ButtonMensaje = styled.button`
     background-color: #f85179;
 `
 
-const ChatSide = styled(Link)`
+const ButtonAddElement = styled(ButtonMensaje)`
+    position:absolute;
+    bottom:5%;
+    right:5%;
+    width:50px;
+    height: 50px;
+    border-radius: 50%;
+    line-height: 50px;
+    cursor: pointer;
+`
+
+const ChatSideElement = styled.div`
     display: flex;
     align-items: center;
-    background-color:#454964;
     padding: 1.5rem 1rem;
-    border-radius: 12px;
+    cursor: pointer;
+
+    &:hover {
+        background-color:#454964;
+    }
+
+    ${({activo}) => activo && css`
+        background-color:#454964;
+    `}
+
 `
 
 const ImageSide = styled.img`
@@ -141,6 +162,16 @@ const ImageSide = styled.img`
 
 const NombreChat = styled.h4`
     margin-left:1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+`
+
+const TitleSidebar = styled.h2`
+    padding-top:2rem;
+    padding-bottom: 2rem;
+    padding-left:1.5rem;
+    padding-right:1.5rem;
 `
 
 export {
@@ -155,9 +186,11 @@ export {
     ButtonMensaje,
     MyMensaje,
     YourMensaje,
-    ChatSide,
+    ChatSideElement,
     ImageSide,
     NombreChat,
     ConstainerChats,
-    HeaderSidebar
+    HeaderSidebarElement,
+    TitleSidebar,
+    ButtonAddElement
 };
