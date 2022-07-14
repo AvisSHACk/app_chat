@@ -8,17 +8,14 @@ const ContainerApp = styled.div`
     height: 100%;
 `
 
-const SidebarContainer = styled.aside`
+const SidebarElement = styled.aside`
     position: absolute;
     left: -100%;
-    width:100%;
-    height: 100%;
     border-right:1px solid #666b91;
-    display: flex;
-    flex-direction: column;
     transition: left .3s;
     background-color: #2e3148;
     width: 80%;
+    height: 100%;
     ${({buttonMobile}) => buttonMobile && css`
         left: 0;
     `}
@@ -28,6 +25,13 @@ const SidebarContainer = styled.aside`
         width: 25%;
     }
 
+`
+
+const SidebarContainer = styled.div`
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 `
 
 const ConstainerChats = styled.div`
@@ -127,6 +131,10 @@ const InputMensaje = styled.input `
 
 const ButtonMensaje = styled.button`
     background-color: #f85179;
+
+    ${({ocultar}) => ocultar && css`
+        display: none;
+    `}
 `
 
 const ButtonAddElement = styled(ButtonMensaje)`
@@ -176,7 +184,8 @@ const TitleSidebar = styled.h2`
 
 export {
     ContainerApp, 
-    MensajesContainer, 
+    MensajesContainer,
+    SidebarElement,
     SidebarContainer, 
     HeaderMensjeria, 
     Mensajes, 

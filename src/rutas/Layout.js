@@ -48,8 +48,7 @@ const Layout = () => {
             />
             <Mensajeria 
                 chats={chats} 
-                id={idChat} 
-                buttonMobile={buttonMobile}
+                id={idChat}
                 cambiarbuttonMobile={cambiarbuttonMobile}
                 usuarioLogeado={usuarioLogeado}
             />

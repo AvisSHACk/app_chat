@@ -28,12 +28,9 @@ const Mensajeria = ({chats, id, cambiarbuttonMobile, usuarioLogeado}) => {
             )
 
             cambiarUserAmigo(
-                chats.filter(chat => chat.id === id)[0].
-                userAmigo.filter(userName => userName !== usuarioLogeado.userName)[0]
+                chats.filter(chat => chat.id === id)[0]
+                .userAmigo.filter(userName => userName !== usuarioLogeado.userName)[0]
             )
-
-
-            console.log(id);
 
             const onSuscribe = onSnapshot(query(collection(db, `chats/${id}/mensajes`), orderBy("timestamp")), (snapshot) => {
                 cambiarMensajes(snapshot.docs.map(mensaje => {

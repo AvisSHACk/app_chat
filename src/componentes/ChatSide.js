@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { ChatSideElement, ImageSide, NombreChat } from "../elementos/ContainerApp";
-const ChatSide = ({chat, getId, usuario, activo}) => {
+const ChatSide = ({chat, getId, usuario, activo, cambiarbuttonMobile}) => {
     const [userAmigo, cambiarUserAmigo] = useState();
     const handleClick = (e) => {
         getId(e, chat.id);
+        cambiarbuttonMobile(false);
     }
 
     useEffect(() => {
@@ -13,7 +14,7 @@ const ChatSide = ({chat, getId, usuario, activo}) => {
     }, [chat, usuario])
 
     return ( 
-        <ChatSideElement key={chat.id} onClick={(e) => handleClick(e)} activo={activo}>
+        <ChatSideElement onClick={(e) => handleClick(e)} activo={activo}>
             <ImageSide src="https://picsum.photos/50" alt="" />
             <NombreChat>{userAmigo}</NombreChat>
         </ChatSideElement>

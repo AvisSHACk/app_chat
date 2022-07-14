@@ -1,21 +1,19 @@
-import {addDoc, auth, collection, db, signOut} from "./../firebase/firebaseConfig";
+import {auth, signOut} from "./../firebase/firebaseConfig";
 import {
-    ButtonMensaje,
     ConstainerChats,
     SidebarContainer,
+    SidebarElement,
     TitleSidebar} from "../elementos/ContainerApp";
 import ChatSide from "./ChatSide";
-import {useState } from "react";
+// import {useState } from "react";
 import { useAuth } from "../contextos/authContext";
-import { useEffect } from "react";
-import { doc, getDoc } from "firebase/firestore";
 import filterEmailFriend from "./../functions/filterEmailFriend";
 import HeaderSidebar from "./HeaderSidebar";
 import ButtonAdd from "./ButtonAdd";
 
 
 const Sidebar = ({chats, cambiarIdChat, buttonMobile, cambiarbuttonMobile, idChat, usuarioLogeado}) => {
-    const [emailAmigo, cambiarEmailAmigo] = useState("");
+    // const [emailAmigo, cambiarEmailAmigo] = useState("");
     const {usuario} = useAuth();
     
     const cerrarSesion = () => {
@@ -26,26 +24,33 @@ const Sidebar = ({chats, cambiarIdChat, buttonMobile, cambiarbuttonMobile, idCha
         e.preventDefault();
         cambiarIdChat(id);
     }
-
-    const cerrarSidebar = () => {
-        cambiarbuttonMobile(false)
-    }
     
     return ( 
-        <SidebarContainer buttonMobile={buttonMobile}>
-            <HeaderSidebar userName={usuarioLogeado.userName} cerrarSesion={cerrarSesion}/>
-            <TitleSidebar>Conversaciones</TitleSidebar>
-            <ConstainerChats>
-                {filterEmailFriend(chats, usuario.email).map((chat) => 
-                    <ChatSide 
-                        chat={chat} 
-                        getId={getId} 
-                        usuario={usuarioLogeado}
-                        activo={idChat === chat.id}/>
-                )}
+        <SidebarElement buttonMobile={buttonMobile} >
+            <SidebarContainer>
+                <HeaderSidebar 
+                    userName={usuarioLogeado.userName} 
+                    cerrarSesion={cerrarSesion} 
+                    cambiarbuttonMobile={cambiarbuttonMobile}
+                    ocultar={buttonMobile}
+                    
+                />
+                <TitleSidebar>Conversaciones</TitleSidebar>
+                <ConstainerChats>
+                    {filterEmailFriend(chats, usuario.email).map((chat) => 
+                        <ChatSide 
+                            key={chat.id}
+                            chat={chat} 
+                            getId={getId} 
+                            usuario={usuarioLogeado}
+                            activo={idChat === chat.id}
+                            cambiarbuttonMobile={cambiarbuttonMobile}
+                        />
+                    )}
+                </ConstainerChats>
                 <ButtonAdd userNameUsuario={usuarioLogeado.userName}/>
-            </ConstainerChats>
-        </SidebarContainer>
+            </SidebarContainer>
+        </SidebarElement>
      );
 }
  
