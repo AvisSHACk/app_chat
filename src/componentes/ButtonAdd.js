@@ -1,4 +1,6 @@
-import { addDoc, collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { useAuth } from "../contextos/authContext";
 import { ButtonAddElement } from "../elementos/ContainerApp";
 import { db } from "../firebase/firebaseConfig";
@@ -31,7 +33,9 @@ const ButtonAdd = ({userNameUsuario}) => {
         
     }
     return ( 
-        <ButtonAddElement onClick={() => handleClick()}>Añadir</ButtonAddElement>
+        <ButtonAddElement onClick={() => handleClick()}>
+            <FontAwesomeIcon icon={faPlus}/>
+        </ButtonAddElement>
      );
 }
  

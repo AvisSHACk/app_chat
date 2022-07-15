@@ -6,13 +6,13 @@ const FormAuth = styled.form`
     flex-direction: column;
     margin-left:auto;
     margin-right: auto;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
     width: 100%;
 
     ${({auth}) => auth && css`
         width: 80%;
-        margin-top: 8rem;
+        padding-top: 8rem;
     `}
     
 `

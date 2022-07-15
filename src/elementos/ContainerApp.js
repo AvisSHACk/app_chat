@@ -43,6 +43,10 @@ const ConstainerChats = styled.div`
 const HeaderSidebarElement = styled.header`
     display:flex;
     justify-content: space-between;
+    align-items: center;
+    padding-left:1.5rem;
+    padding-right:1.5rem;
+    border-bottom:1px solid #666b91;
 `
 
 const MensajesContainer = styled.main`
@@ -124,52 +128,67 @@ const FormMensaje = styled.form`
 
 const InputMensaje = styled.input `
     border:1px solid #666b91;
-    width: 92%;
-    height: 100%;
+    width: 100%;
+    padding: 1rem;
     color:#fff;
 `
 
 const ButtonMensaje = styled.button`
-    background-color: #f85179;
+    background-color: #7821c7;
+    cursor: pointer;
+    color:#fff;
 
-    ${({ocultar}) => ocultar && css`
-        display: none;
+    ${({marginleftright}) => marginleftright && css`
+        margin-left: auto;
+        margin-right: 1rem;
+    `}
+    ${({marginleft}) => marginleft && css`
+        margin-left: 1rem;
     `}
 `
 
-const ButtonAddElement = styled(ButtonMensaje)`
+const ButtonElement = styled(ButtonMensaje)`
+    padding:1rem 1.2rem;
+    border-radius: 50%;
+`
+
+const ButtonAddElement = styled(ButtonElement)`
     position:absolute;
+    padding:0;
+    width: 50px;
+    height:50px;
+    line-height: 50px;
     bottom:5%;
     right:5%;
-    width:50px;
-    height: 50px;
-    border-radius: 50%;
-    line-height: 50px;
-    cursor: pointer;
+    background-color: #f85179;
 `
 
 const ChatSideElement = styled.div`
     display: flex;
     align-items: center;
     padding: 1.5rem 1rem;
+    border-top:1px solid #1f2444;
     cursor: pointer;
 
     &:hover {
-        background-color:#454964;
+        background-color:#393c52;
     }
 
     ${({activo}) => activo && css`
         background-color:#454964;
+        &:hover {
+            background-color:#454964;
+        }
     `}
 
 `
 
 const ImageSide = styled.img`
     border-radius: 50%;
+    margin-right:1rem;
 `
 
 const NombreChat = styled.h4`
-    margin-left:1rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -178,8 +197,16 @@ const NombreChat = styled.h4`
 const TitleSidebar = styled.h2`
     padding-top:2rem;
     padding-bottom: 2rem;
-    padding-left:1.5rem;
-    padding-right:1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    ${({paddingLeftRight}) => paddingLeftRight && css`
+        border-bottom:1px solid #666b91;
+        padding-left:1.5rem;
+        padding-right: 1.5rem;
+    `}
 `
 
 export {
@@ -201,5 +228,6 @@ export {
     ConstainerChats,
     HeaderSidebarElement,
     TitleSidebar,
-    ButtonAddElement
+    ButtonAddElement,
+    ButtonElement
 };

@@ -1,7 +1,9 @@
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { 
-    ButtonMensaje, 
+    ButtonElement, 
     ChatBoxContainer, 
     FormMensaje,
     InputMensaje
@@ -36,7 +38,9 @@ const ChatBox = ({id, userAmigo, anchor}) => {
                     onChange={(e) => cambiarMensaje(e.target.value)}
                     value={mensaje}
                 />
-                <ButtonMensaje>Enviar</ButtonMensaje>
+                <ButtonElement marginleft>
+                    <FontAwesomeIcon icon={faPaperPlane}/>
+                </ButtonElement>
             </FormMensaje>
         </ChatBoxContainer>
      );

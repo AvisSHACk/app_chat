@@ -35,7 +35,7 @@ const Sidebar = ({chats, cambiarIdChat, buttonMobile, cambiarbuttonMobile, idCha
                     ocultar={buttonMobile}
                     
                 />
-                <TitleSidebar>Conversaciones</TitleSidebar>
+                <TitleSidebar paddingLeftRight>Conversaciones</TitleSidebar>
                 <ConstainerChats>
                     {filterEmailFriend(chats, usuario.email).map((chat) => 
                         <ChatSide 
@@ -48,7 +48,7 @@ const Sidebar = ({chats, cambiarIdChat, buttonMobile, cambiarbuttonMobile, idCha
                         />
                     )}
                 </ConstainerChats>
-                <ButtonAdd userNameUsuario={usuarioLogeado.userName}/>
+                <ButtonAdd pink userNameUsuario={usuarioLogeado.userName}/>
             </SidebarContainer>
         </SidebarElement>
      );

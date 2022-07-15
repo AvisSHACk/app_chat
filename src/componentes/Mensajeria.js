@@ -1,3 +1,5 @@
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../contextos/authContext";
@@ -7,7 +9,7 @@ import {
     MensajesContainer, 
     MyMensaje
 } from "../elementos/ContainerApp";
-import { Button } from "../elementos/FormAuth";
+import { ButtonElement } from "../elementos/ContainerApp";
 import { db } from "../firebase/firebaseConfig";
 import ChatBox from "./ChatBox";
 
@@ -53,7 +55,9 @@ const Mensajeria = ({chats, id, cambiarbuttonMobile, usuarioLogeado}) => {
     return ( 
         <MensajesContainer>
             <HeaderMensjeria>
-                <Button onClick={() => abrirMenu()}>Menu</Button>
+                <ButtonElement onClick={() => abrirMenu()}>
+                    <FontAwesomeIcon icon={faBars}/>
+                </ButtonElement>
                 {/* <h2>{!cargando && userAmigo}</h2> */}
                 <h2>{!cargando && userAmigo}</h2>
             </HeaderMensjeria>
