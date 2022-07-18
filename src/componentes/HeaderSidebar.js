@@ -11,7 +11,7 @@ const HeaderSidebar = ({userName, cerrarSesion, cambiarbuttonMobile}) => {
                 <ImageSide src="https://picsum.photos/50" alt="" />
                 {userName}
             </TitleSidebar>
-            <ButtonElement onClick={() => cambiarbuttonMobile(false)} title="Cerrar sidebar" marginleftright>
+            <ButtonElement onClick={() => cambiarbuttonMobile(false)} title="Cerrar sidebar" marginleftright mobile>
                 <FontAwesomeIcon icon={faXmark} />
             </ButtonElement>
             <ButtonElement onClick={cerrarSesion} title="Cerrar sesion">

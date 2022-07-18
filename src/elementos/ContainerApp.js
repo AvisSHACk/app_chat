@@ -150,6 +150,14 @@ const ButtonMensaje = styled.button`
 const ButtonElement = styled(ButtonMensaje)`
     padding:1rem 1.2rem;
     border-radius: 50%;
+
+    
+
+    ${({mobile}) => mobile && css`
+        @media screen and (min-width: 900px) {
+            display: none;
+        }
+    `}
 `
 
 const ButtonAddElement = styled(ButtonElement)`

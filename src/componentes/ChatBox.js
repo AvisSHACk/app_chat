@@ -1,6 +1,5 @@
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { 
     ButtonElement, 
@@ -8,20 +7,15 @@ import {
     FormMensaje,
     InputMensaje
 } from "../elementos/ContainerApp";
-import { db } from "../firebase/firebaseConfig";
+import { handleMessageSend } from "../firebase/firebaseConfig";
 const ChatBox = ({id, userAmigo, anchor}) => {
     const [mensaje, cambiarMensaje] = useState("");
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        await addDoc(collection(db, `chats/${id}/mensajes`), {
-            mensaje: mensaje,
-            email: userAmigo,
-            timestamp: serverTimestamp()
-        })
+        await handleMessageSend(id, mensaje, userAmigo);
         cambiarMensaje("");
         anchor.current.scrollIntoView({behavior: "smooth"})
-
     }
 
     useEffect(() => {

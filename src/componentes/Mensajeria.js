@@ -33,7 +33,8 @@ const Mensajeria = ({chats, id, cambiarbuttonMobile, usuarioLogeado}) => {
                 chats.filter(chat => chat.id === id)[0]
                 .userAmigo.filter(userName => userName !== usuarioLogeado.userName)[0]
             )
-
+            
+            //Obtener los mensajes de cada chat disponible
             const onSuscribe = onSnapshot(query(collection(db, `chats/${id}/mensajes`), orderBy("timestamp")), (snapshot) => {
                 cambiarMensajes(snapshot.docs.map(mensaje => {
                     return {...mensaje.data()};
@@ -55,7 +56,7 @@ const Mensajeria = ({chats, id, cambiarbuttonMobile, usuarioLogeado}) => {
     return ( 
         <MensajesContainer>
             <HeaderMensjeria>
-                <ButtonElement onClick={() => abrirMenu()}>
+                <ButtonElement onClick={() => abrirMenu()} mobile>
                     <FontAwesomeIcon icon={faBars}/>
                 </ButtonElement>
                 {/* <h2>{!cargando && userAmigo}</h2> */}

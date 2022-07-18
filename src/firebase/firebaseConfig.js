@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import {getAuth, createUserWithEmailAndPassword, signOut, onAuthStateChanged, signInWithEmailAndPassword} from "firebase/auth";
-import {getFirestore, addDoc, collection, setDoc, doc} from "firebase/firestore";
+import {getFirestore, addDoc, collection, setDoc, doc, getDoc, serverTimestamp, query, getDocs, where} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,6 +20,33 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
 
+const getUserInfo = async (usuario) => {
+    const docRef = doc(db, `usuarios/${usuario.uid}`);
+    const docSnap = await getDoc(docRef);
+    return docSnap;
+}
+
+const handleMessageSend = async (id, mensaje, userAmigo) => {
+    await addDoc(collection(db, `chats/${id}/mensajes`), {
+        mensaje: mensaje,
+        email: userAmigo,
+        timestamp: serverTimestamp()
+    })
+}
+
+const getNameAmigo = async (email) => {
+    let userAmigo = "";
+    const q = query(collection(db, "usuarios"), where('email', '==', `${email}` ));
+    const consulta = await getDocs(q);
+
+    consulta.forEach((doc) => {
+        userAmigo = doc.data();
+    });
+
+    return userAmigo;
+}
+
+
 export {
     auth,
     db,
@@ -31,5 +58,8 @@ export {
     doc,
     signOut,
     onAuthStateChanged,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    getUserInfo,
+    handleMessageSend,
+    getNameAmigo
 }
