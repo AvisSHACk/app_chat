@@ -66,7 +66,8 @@ const Registro = () => {
             <Input 
                 type="password" 
                 name="password" 
-                id="email"
+                id="password"
+                autoComplete="on"
                 placeholder="Ingresa tu contraseña"
                 value={password}
                 onChange={(e) => cambiarPassword(e.target.value)}

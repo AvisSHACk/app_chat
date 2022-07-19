@@ -1,9 +1,8 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { addDoc, collection} from "firebase/firestore";
 import { useAuth } from "../contextos/authContext";
 import { ButtonAddElement } from "../elementos/ContainerApp";
-import { db, getNameAmigo } from "../firebase/firebaseConfig";
+import { addChat, getNameAmigo } from "../firebase/firebaseConfig";
 
 const ButtonAdd = ({userNameUsuario}) => {
     const {usuario} = useAuth();
@@ -14,10 +13,7 @@ const ButtonAdd = ({userNameUsuario}) => {
         if(email !== "") {
             let userAmigo = await getNameAmigo(email);
 
-            addDoc(collection(db, "chats"), {
-                users: [email, usuario.email],
-                userAmigo: [userAmigo.userName, userNameUsuario] 
-            })
+            addChat([email, usuario.email], [userAmigo.userName, userNameUsuario]);
         }
         
     }

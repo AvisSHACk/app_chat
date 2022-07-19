@@ -46,6 +46,14 @@ const getNameAmigo = async (email) => {
     return userAmigo;
 }
 
+const addChat = (users, userAmigo) => {
+    console.log(users, userAmigo)
+    addDoc(collection(db, "chats"), {
+        users: users,
+        userAmigo: userAmigo
+    })
+}
+
 
 export {
     auth,
@@ -61,5 +69,6 @@ export {
     signInWithEmailAndPassword,
     getUserInfo,
     handleMessageSend,
-    getNameAmigo
+    getNameAmigo,
+    addChat
 }

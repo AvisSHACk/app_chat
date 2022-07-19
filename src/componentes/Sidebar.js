@@ -1,4 +1,3 @@
-import {auth, signOut} from "./../firebase/firebaseConfig";
 import {
     ConstainerChats,
     SidebarContainer,
@@ -15,10 +14,6 @@ import ButtonAdd from "./ButtonAdd";
 const Sidebar = ({chats, cambiarIdChat, buttonMobile, cambiarbuttonMobile, idChat, usuarioLogeado}) => {
     // const [emailAmigo, cambiarEmailAmigo] = useState("");
     const {usuario} = useAuth();
-    
-    const cerrarSesion = () => {
-        signOut(auth);
-    }
 
     const getId = (e, id) => {
         e.preventDefault();
@@ -29,13 +24,12 @@ const Sidebar = ({chats, cambiarIdChat, buttonMobile, cambiarbuttonMobile, idCha
         <SidebarElement buttonMobile={buttonMobile} >
             <SidebarContainer>
                 <HeaderSidebar 
-                    userName={usuarioLogeado.userName} 
-                    cerrarSesion={cerrarSesion} 
+                    userName={usuarioLogeado.userName}
                     cambiarbuttonMobile={cambiarbuttonMobile}
                     ocultar={buttonMobile}
                     
                 />
-                <TitleSidebar paddingLeftRight>Conversaciones</TitleSidebar>
+                <TitleSidebar paddingLeftRight conversaciones>Conversaciones</TitleSidebar>
                 <ConstainerChats>
                     {filterEmailFriend(chats, usuario.email).map((chat) => 
                         <ChatSide 

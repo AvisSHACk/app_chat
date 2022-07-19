@@ -35,7 +35,6 @@ const SidebarContainer = styled.div`
 `
 
 const ConstainerChats = styled.div`
-    flex-grow: 1;
     overflow-y: scroll;
     position:relative;
 `
@@ -43,10 +42,11 @@ const ConstainerChats = styled.div`
 const HeaderSidebarElement = styled.header`
     display:flex;
     justify-content: space-between;
-    align-items: center;
     padding-left:1.5rem;
     padding-right:1.5rem;
     border-bottom:1px solid #666b91;
+    padding-top:2rem;
+    padding-bottom: 2rem;
 `
 
 const MensajesContainer = styled.main`
@@ -62,24 +62,30 @@ const MensajesContainer = styled.main`
 
 const HeaderMensjeria = styled.header`
     display: flex;
-    align-items: center;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    height: 10%;
+    padding: 1.5rem .5rem;
     border-bottom:1px solid #666b91;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
     
+    @media screen and (min-width: 900px) {
+        padding: 2rem;
+    }
 `
 
 const Mensajes = styled.div`
-    height: 80%;
-    padding-right: 2rem;
-    padding-left: 2rem;
+    flex:1;
+    padding-right: .5rem;
+    padding-left: .5rem;
     display:flex;
     flex-direction: column;
     overflow-y: scroll;
+
+    @media screen and (min-width: 900px) {
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
 
     &::-webkit-scrollbar {
         width: 8px;
@@ -94,10 +100,11 @@ const Mensajes = styled.div`
 
 const MyMensaje = styled.p`
     background-color: #7540ed;
-    padding: 1.2rem;
+    padding: 1.1rem 1.6rem;
     display: inline-block;
     border-radius: 20px;
     margin-left: auto;
+    max-width: 60%;
 
     ${({propiedad}) => propiedad && css`
         background-color: #454964;
@@ -113,23 +120,21 @@ const YourMensaje = styled(MyMensaje)`
 `
 
 const ChatBoxContainer = styled.div`
-    padding-right: 2rem;
-    padding-left: 2rem;
-    height: 10%;
+    padding: 1rem;
+    /* -webkit-box-shadow: 0px -4px 20px -4px rgba(0,0,0,0.66);
+-moz-box-shadow: 0px -4px 20px -4px rgba(0,0,0,0.66);
+box-shadow: 0px -4px 20px -4px rgba(0,0,0,0.66); */
 `
 
 const FormMensaje = styled.form`
     display:flex;
     justify-content: space-between;
-    height:100%;
-    padding-top: .8rem;
-    padding-bottom: .8rem;
 `
 
 const InputMensaje = styled.input `
     border:1px solid #666b91;
-    width: 100%;
-    padding: 1rem;
+    flex: 1;
+    padding: 1.6rem 1.2rem;
     color:#fff;
 `
 
@@ -137,6 +142,7 @@ const ButtonMensaje = styled.button`
     background-color: #7821c7;
     cursor: pointer;
     color:#fff;
+    width: 50px;
 
     ${({marginleftright}) => marginleftright && css`
         margin-left: auto;
@@ -148,7 +154,6 @@ const ButtonMensaje = styled.button`
 `
 
 const ButtonElement = styled(ButtonMensaje)`
-    padding:1rem 1.2rem;
     border-radius: 50%;
 
     
@@ -203,8 +208,6 @@ const NombreChat = styled.h4`
 `
 
 const TitleSidebar = styled.h2`
-    padding-top:2rem;
-    padding-bottom: 2rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -214,6 +217,12 @@ const TitleSidebar = styled.h2`
         border-bottom:1px solid #666b91;
         padding-left:1.5rem;
         padding-right: 1.5rem;
+    `}
+
+    ${({conversaciones}) => conversaciones && css`
+        border-bottom:1px solid #666b91;
+        padding-top:2rem;
+        padding-bottom: 2rem;
     `}
 `
 

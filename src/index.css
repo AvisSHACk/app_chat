@@ -16,7 +16,9 @@
 
 html {
   font-size: 62.5%;
+  height: -webkit-fill-available;
 }
+
 body {
   position: relative;
   margin: 0;
@@ -28,7 +30,8 @@ body {
   background-color: #2e3148;
   color:#fff;
   font-size:1.6rem;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 input, button, textarea {

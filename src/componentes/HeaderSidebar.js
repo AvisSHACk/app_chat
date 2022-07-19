@@ -1,9 +1,14 @@
+import {auth, signOut} from "./../firebase/firebaseConfig";
 import { faArrowRightFromBracket, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ButtonElement } from "./../elementos/ContainerApp";
 import {HeaderSidebarElement, TitleSidebar} from "./../elementos/ContainerApp";
 import {ImageSide} from "./../elementos/ContainerApp";
-const HeaderSidebar = ({userName, cerrarSesion, cambiarbuttonMobile}) => {
+const HeaderSidebar = ({userName, cambiarbuttonMobile}) => {
+
+    const cerrarSesion = () => {
+        signOut(auth);
+    }
     
     return ( 
         <HeaderSidebarElement>
