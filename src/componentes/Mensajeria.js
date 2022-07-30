@@ -1,7 +1,6 @@
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useAuth } from "../contextos/authContext";
 import { 
     HeaderMensjeria, 
@@ -10,53 +9,19 @@ import {
     MyMensaje
 } from "../elementos/ContainerApp";
 import { ButtonElement } from "../elementos/ContainerApp";
-import { db } from "../firebase/firebaseConfig";
 import ChatBox from "./ChatBox";
+import useFetchMessages from "../hooks/useFetchMessages";
+import abrirMenu from "../functions/abrirMenu";
 
 const Mensajeria = ({chats, id, cambiarbuttonMobile, usuarioLogeado}) => {
     const {usuario} = useAuth();
-    const [userAmigo, cambiarUserAmigo] = useState({});
-    const [mensajes, cambiarMensajes] = useState([]);
-    const [emailAmigo, cambiarEmailAmigo] = useState([])
-    const [cargando, cambiarCargando] = useState(true);
     const anchor = useRef();
-    
-
-    useEffect(() =>{
-        if(id) {
-            cambiarEmailAmigo(
-                chats.filter(chat => chat.id === id)[0]
-                .users.filter(user => user !== usuario.email)[0]
-            )
-
-            cambiarUserAmigo(
-                chats.filter(chat => chat.id === id)[0]
-                .userAmigo.filter(userName => userName !== usuarioLogeado.userName)[0]
-            )
-            
-            //Obtener los mensajes de cada chat disponible
-            const onSuscribe = onSnapshot(query(collection(db, `chats/${id}/mensajes`), orderBy("timestamp")), (snapshot) => {
-                cambiarMensajes(snapshot.docs.map(mensaje => {
-                    return {...mensaje.data()};
-                }));
-            })
-            
-            cambiarCargando(false);
-            return onSuscribe;
-        }
-
-
-        
-    }, [id, usuario, chats, usuarioLogeado])
-
-    const abrirMenu = () => {
-        cambiarbuttonMobile(true);
-    }
+    const [userAmigo, mensajes, emailAmigo, cargando] = useFetchMessages(chats, id, usuarioLogeado);
 
     return ( 
         <MensajesContainer>
             <HeaderMensjeria>
-                <ButtonElement onClick={() => abrirMenu()} mobile>
+                <ButtonElement onClick={() => abrirMenu(cambiarbuttonMobile)} mobile>
                     <FontAwesomeIcon icon={faBars}/>
                 </ButtonElement>
                 {/* <h2>{!cargando && userAmigo}</h2> */}
